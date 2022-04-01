@@ -1,0 +1,155 @@
+<div class="row">
+  <div class="col-md-8 col-6">
+    <div id="filter">
+      <div class="row">
+        <div class="col-4">
+          <div>
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Scan Barcode (F12)"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-8">
+          <div>
+            <div class="input-group mb-3">
+              <input
+                type="text"
+                class="form-control"
+                aria-label="Dollar amount (with dot and two decimal places)"
+                placeholder="ค้าหาสินค้า"
+              />
+              <span class="input-group-text"><i class="bi bi-search"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="product">
+      <div class="row">
+        <div
+          *ngFor="let in of counter(50); let i = index"
+          class="col-md-3 col-6 mt-1"
+          (click)="selectProduct()"
+        >
+          <div class="card">
+            <div class="card-body">
+              <div class="text-center">
+                <img
+                  src="https://image.katexoxo.com/uploads/images/kxo_20220401030417va83s.jpg"
+                  class="img-fluid image-product"
+                />
+              </div>
+            </div>
+            <div class="card-footer">
+              <div
+                class="product-text"
+                title="Hermes Sandals Izmir Size 42 in Yellow"
+              >
+                Hermes Sandals Izmir Size 42 in Yellow
+                <div>{{ 265 + i | currency: "฿" }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div
+            class="col-md-3 col-4 text-muted text-nowrap"
+            id="total-price-text"
+          >
+            ลด ฿
+          </div>
+          <div class="col-md-9 col-8">
+            <h3 class="text-muted text-nowrap">100</h3>
+          </div>
+        </div>
+
+        <div class="row">
+          <div
+            class="col-md-3 col-4 text-muted text-nowrap"
+            id="total-price-text"
+          >
+            รวม
+          </div>
+          <div class="col-md-9 col-8">
+            <del class="text-danger text-nowrap">1500</del>
+            <h3 class="text-success text-nowrap">฿1400</h3>
+          </div>
+        </div>
+        <div class="d-grid gap-2 mt-3">
+          <button
+            class="btn btn-primary btn-lg text-nowrap"
+            (click)="checkout()"
+          >
+            ชำระเงิน
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card mt-3 cart-list">
+      <div class="card-body">
+        <div
+          class="row cart-product"
+          *ngFor="let in of counter(5); let i = index"
+        >
+          <div class="col-md-7 col-6 cart-product-text">
+            <div>1. Hermes Sandals Izmir Size 42 in Yellow</div>
+            <div>
+              <button class="btn btn-sm btn-danger">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </div>
+          <div class="col-md-5 col-6">
+            <div class="text-nowrap">
+              <b>{{ 265 + i | currency: "฿" }}</b>
+            </div>
+            <div class="text-nowrap">x1</div>
+          </div>
+          <hr class="mt-1" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--form modal-->
+<div
+  class="modal fade"
+  id="myModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Bootstrp Modal</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <h3>Hello!</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

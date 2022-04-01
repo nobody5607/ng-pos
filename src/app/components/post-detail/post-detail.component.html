@@ -1,0 +1,8 @@
+<p>post-detail works!</p>
+<button type="button" (click)="goBack()">go back</button>
+
+<h1 *ngIf="loading">Loading...</h1>
+<div *ngIf="post">
+  <div>{{ post.title }}</div>
+  <div>{{ post.body }}</div>
+</div>

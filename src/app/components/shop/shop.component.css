@@ -1,0 +1,48 @@
+.image-product{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.product-text{
+    white-space: nowrap;
+    /* width: 100px; */
+    overflow: hidden;
+    text-overflow: ellipsis;    
+    font-size: 12px;
+}
+#product .col-md-3{
+    padding:3px 3px 0px 3px;
+    cursor: pointer;
+}
+#product{
+    height: 90vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-left: 15px;
+}
+.cart-list{
+    max-height: 50vh;
+    min-height: 320px;
+    overflow-y: scroll;
+    flex: 5;
+    height: auto;
+}
+#total-price-text{
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cart-product{
+    font-size:12px;
+}
+.cart-product-text{
+    white-space: nowrap;
+    
+    overflow: hidden;
+    text-overflow: ellipsis;    
+    font-size: 12px;
+}
+
+
+
