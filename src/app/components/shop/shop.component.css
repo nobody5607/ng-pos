@@ -34,7 +34,9 @@
     align-items: center;
 }
 .cart-product{
-    font-size:12px;
+    font-size: 12px;
+    border-bottom: 1px solid #d8dcdf;
+    padding-bottom: 10px;
 }
 .cart-product-text{
     white-space: nowrap;

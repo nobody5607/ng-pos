@@ -9,6 +9,7 @@
                 type="text"
                 class="form-control"
                 placeholder="Scan Barcode (F12)"
+                [(ngModel)]="barcode"
               />
             </div>
           </div>
@@ -31,26 +32,20 @@
     <div id="product">
       <div class="row">
         <div
-          *ngFor="let in of counter(50); let i = index"
+          *ngFor="let product of products; let i = index"
           class="col-md-3 col-6 mt-1"
-          (click)="selectProduct()"
+          (click)="addToCart(product)"
         >
           <div class="card">
             <div class="card-body">
               <div class="text-center">
-                <img
-                  src="https://image.katexoxo.com/uploads/images/kxo_20220401030417va83s.jpg"
-                  class="img-fluid image-product"
-                />
+                <img [src]="product.image" class="img-fluid image-product" />
               </div>
             </div>
             <div class="card-footer">
-              <div
-                class="product-text"
-                title="Hermes Sandals Izmir Size 42 in Yellow"
-              >
-                Hermes Sandals Izmir Size 42 in Yellow
-                <div>{{ 265 + i | currency: "฿" }}</div>
+              <div class="product-text" [title]="product.name">
+                {{ product.name }}
+                <div>{{ product.price | currency: "฿" }}</div>
               </div>
             </div>
           </div>
@@ -82,7 +77,9 @@
           </div>
           <div class="col-md-9 col-8">
             <del class="text-danger text-nowrap">1500</del>
-            <h3 class="text-success text-nowrap">฿1400</h3>
+            <h3 class="text-success text-nowrap">
+              {{ totalPrice | currency: "฿" }}
+            </h3>
           </div>
         </div>
         <div class="d-grid gap-2 mt-3">
@@ -97,59 +94,38 @@
     </div>
     <div class="card mt-3 cart-list">
       <div class="card-body">
-        <div
-          class="row cart-product"
-          *ngFor="let in of counter(5); let i = index"
-        >
-          <div class="col-md-7 col-6 cart-product-text">
-            <div>1. Hermes Sandals Izmir Size 42 in Yellow</div>
-            <div>
-              <button class="btn btn-sm btn-danger">
-                <i class="bi bi-trash"></i>
-              </button>
+        <div *ngIf="carts && carts.length > 0; else elseBlock">
+          <div class="row cart-product" *ngFor="let c of carts; let i = index">
+            <div class="col-md-7 col-6 cart-product-text">
+              <div>
+                <b>{{ i + 1 }}.</b> {{ c.product_name }}
+              </div>
+              <div>
+                <button
+                  class="btn btn-sm btn-danger"
+                  (click)="removeCart(c.product_id)"
+                >
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+            <div class="col-md-5 col-6 text-end">
+              <div class="text-nowrap">
+                <b>{{ c.product_price | currency: "฿" }}</b>
+              </div>
+              <div class="text-nowrap">x{{ c.product_qty }}</div>
             </div>
           </div>
-          <div class="col-md-5 col-6">
-            <div class="text-nowrap">
-              <b>{{ 265 + i | currency: "฿" }}</b>
-            </div>
-            <div class="text-nowrap">x1</div>
-          </div>
-          <hr class="mt-1" />
+          <!-- endfor -->
         </div>
+        <ng-template #elseBlock
+          ><div class="text-center">ไม่พบรายการ</div></ng-template
+        >
       </div>
     </div>
   </div>
 </div>
 
 <!--form modal-->
-<div
-  class="modal fade"
-  id="myModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Bootstrp Modal</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <h3>Hello!</h3>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+
+<app-calculator></app-calculator>

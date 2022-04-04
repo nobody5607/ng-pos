@@ -1,0 +1,43 @@
+<div
+  class="modal fade"
+  id="modalCalculator"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div id="calculator-display">
+          <button class="ng-star-inserted" (click)="clear()">
+            <img src="assets/images/ic_clear.svg" style="width: 20px" /></button
+          ><!---->
+          <div>{{ totalNumber }}</div>
+        </div>
+        <div class="numpad-container">
+          <button (click)="setNumber(7)">7</button>
+          <button (click)="setNumber(8)">8</button>
+          <button (click)="setNumber(9)">9</button>
+          <button (click)="fullNumber(1000)" class="hotkey-button">1000</button>
+          <button (click)="setNumber(4)">4</button>
+          <button (click)="setNumber(5)">5</button>
+          <button (click)="setNumber(6)">6</button>
+          <button (click)="fullNumber(500)" class="hotkey-button">500</button>
+          <button (click)="setNumber(1)">1</button>
+          <button (click)="setNumber(2)">2</button>
+          <button (click)="setNumber(3)">3</button>
+          <button (click)="fullNumber(100)" class="hotkey-button">100</button>
+          <button (click)="setDot('.')">.</button>
+          <button (click)="setNumber(0)">0</button>
+          <button (click)="remove()">x</button>
+          <button (click)="fullNumberAll()" class="hotkey-button">เต็ม</button>
+
+          <button></button>
+          <button></button>
+          <button></button>
+          <button class="btn btn-primary btn-ok">ตกลง</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

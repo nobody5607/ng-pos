@@ -8,6 +8,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { PostDetailComponent } from './components/post-detail/post-detail.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ShopComponent } from './components/shop/shop.component';
+
+import { FormsModule } from '@angular/forms';
+import { CalculatorComponent } from './components/calculator/calculator.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,8 +18,9 @@ import { ShopComponent } from './components/shop/shop.component';
     DashboardComponent,
     PostDetailComponent,
     ShopComponent,
+    CalculatorComponent,
   ],
-  imports: [HttpClientModule, BrowserModule, AppRoutingModule],
+  imports: [HttpClientModule, BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -1,0 +1,52 @@
+
+.modal-body {
+    padding: 0;
+}
+button.btn.btn-primary.btn-ok {
+    background: #00d0ff;
+    border-radius: 0px;
+    color: #fff;
+}
+#calculator-display{
+    background-color: #f2f5f7;
+    color: #222;
+    font-size: 40px;
+    padding: 12px 12px 12px 0;
+    text-align: right;
+    display: flex;
+    height: 85px;
+}
+#calculator-display button{
+    flex-basis: 55px;
+    height: 100%;
+    width: 55px;
+    background-color: transparent;
+    border: 0;
+}
+#calculator-display div {
+    flex: 1;
+    text-align: right;
+}
+.numpad-container {
+    background-color: #eaeaea;
+    display: grid;
+    grid-gap: 1px;
+    grid-template-columns: repeat(4,1fr);
+    padding-top: 1px;
+}
+.numpad-container button{
+        border: 0;
+        background-color: #fff;
+        padding: 18px 0;
+        position: relative;
+        text-align: center;
+        font-size: 20px;
+        color: #333;
+}
+.numpad-container button:hover {
+    color: #646464;
+    background-color: #f2f5f7!important;
+}
+.hotkey-button {
+    color: #0075b2!important;
+}
