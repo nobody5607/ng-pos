@@ -84,7 +84,7 @@
         </div>
         <div class="d-grid gap-2 mt-3">
           <button
-            class="btn btn-primary btn-lg text-nowrap"
+            class="btn btn-primary btn-lg text-nowrap btn-xl"
             (click)="checkout()"
           >
             ชำระเงิน
@@ -127,5 +127,9 @@
 </div>
 
 <!--form modal-->
-
-<app-calculator></app-calculator>
+<div>ok {{ totalMoney }}</div>
+<app-calculator
+  [totalPrice]="totalPrice"
+  [formModal]="formModal"
+  (totalMoney)="submitOrder($event)"
+></app-calculator>
