@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'product', component: ProductComponent },
   { path: 'create-product', component: CreateProductComponent },
+  { path: 'create-product/:id', component: CreateProductComponent },
   { path: 'login', component: LoginComponent },
   { path: 'shop', component: ShopComponent },
 ];

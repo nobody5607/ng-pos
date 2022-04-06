@@ -1,68 +1,77 @@
 <div class="container">
   <div class="row">
-    <div class="col-6">
+    <div class="col-md-6">
       <h1>เพิ่มสินค้า</h1>
 
-      <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
-        <div class="mt-3" *ngIf="attribute">
-          <label>แบรนด์: </label>
-          <select formControlName="brand" class="form-control">
-            <option *ngFor="let i of attribute.brands" [value]="i._id">
-              {{ i.name }}
-            </option>
-          </select>
-        </div>
-        <div class="mt-3">
-          <label for="name">ชื่อสินค้า: </label>
-          <input type="text" formControlName="name" class="form-control" />
-        </div>
+      <form [formGroup]="product_form" (ngSubmit)="onSubmit()">
+        <div style="height: 50vh; overflow-y: scroll">
+          <div class="mt-3" *ngIf="attribute">
+            <label>แบรนด์: </label>
+            <select formControlName="brand" class="form-control">
+              <option *ngFor="let i of attribute.brands" [value]="i._id">
+                {{ i.name }}
+              </option>
+            </select>
+          </div>
+          <div class="mt-3">
+            <label for="name">รหัสสินค้า: </label>
+            <input
+              type="text"
+              formControlName="product_id"
+              class="form-control"
+            />
+          </div>
+          <div class="mt-3">
+            <label for="name">ชื่อสินค้า: </label>
+            <input type="text" formControlName="name" class="form-control" />
+          </div>
 
-        <div class="mt-3">
-          <label>รายละเอียดสินค้า: </label>
-          <textarea formControlName="detail" class="form-control"></textarea>
-        </div>
-        <div class="mt-3">
-          <label>ราคาต้นทุน: </label>
-          <input type="text" formControlName="cost" class="form-control" />
-        </div>
-        <div class="mt-3">
-          <label>ราคาขาย: </label>
-          <input type="text" formControlName="price" class="form-control" />
-        </div>
-        <div class="mt-3" *ngIf="attribute">
-          <label>ประเภท: </label>
-          <select formControlName="categorys" class="form-control">
-            <option *ngFor="let i of attribute.categorys" [value]="i._id">
-              {{ i.name }}
-            </option>
-          </select>
-        </div>
-        <div class="mt-3">
-          <label>จำนวน: </label>
-          <input type="text" formControlName="stock" class="form-control" />
-        </div>
-        <div class="mt-3" *ngIf="attribute">
-          <label>หน่วย: </label>
-          <select formControlName="units" class="form-control">
-            <option *ngFor="let i of attribute.units" [value]="i._id">
-              {{ i.name }}
-            </option>
-          </select>
-        </div>
+          <div class="mt-3">
+            <label>รายละเอียดสินค้า: </label>
+            <textarea formControlName="detail" class="form-control"></textarea>
+          </div>
+          <div class="mt-3">
+            <label>ราคาต้นทุน: </label>
+            <input type="text" formControlName="cost" class="form-control" />
+          </div>
+          <div class="mt-3">
+            <label>ราคาขาย: </label>
+            <input type="text" formControlName="price" class="form-control" />
+          </div>
+          <div class="mt-3" *ngIf="attribute">
+            <label>ประเภท: </label>
+            <select formControlName="categorys" class="form-control">
+              <option *ngFor="let i of attribute.categorys" [value]="i._id">
+                {{ i.name }}
+              </option>
+            </select>
+          </div>
+          <div class="mt-3">
+            <label>จำนวน: </label>
+            <input type="text" formControlName="stock" class="form-control" />
+          </div>
+          <div class="mt-3" *ngIf="attribute">
+            <label>หน่วย: </label>
+            <select formControlName="units" class="form-control">
+              <option *ngFor="let i of attribute.units" [value]="i._id">
+                {{ i.name }}
+              </option>
+            </select>
+          </div>
 
-        <div class="mt-3">
-          <label>น้ำหน้า: </label>
-          <input type="text" formControlName="weight" class="form-control" />
-        </div>
-        <div class="mt-3">
-          <label>Barcode: </label>
-          <input
-            type="text"
-            formControlName="barcode_code"
-            class="form-control"
-          />
-        </div>
-        <!-- <div class="mt-3">
+          <div class="mt-3">
+            <label>น้ำหน้า: </label>
+            <input type="text" formControlName="weight" class="form-control" />
+          </div>
+          <div class="mt-3">
+            <label>Barcode: </label>
+            <input
+              type="text"
+              formControlName="barcode_code"
+              class="form-control"
+            />
+          </div>
+          <!-- <div class="mt-3">
           <label>cost_discount_price: </label>
           <input
             type="text"
@@ -70,11 +79,15 @@
             class="form-control"
           />
         </div> -->
-        <div class="mt-3">
-          <label>แจ้งเตือนขั้นต่ำ: </label>
-          <input type="text" formControlName="min_stock" class="form-control" />
-        </div>
-        <!-- <div class="mt-3">
+          <div class="mt-3">
+            <label>แจ้งเตือนขั้นต่ำ: </label>
+            <input
+              type="text"
+              formControlName="min_stock"
+              class="form-control"
+            />
+          </div>
+          <!-- <div class="mt-3">
           <label>เปิดใช้งานปัดเศษ: </label>
           <input
             type="text"
@@ -83,31 +96,35 @@
           />
         </div> -->
 
-        <div class="mt-3">
-          <label for="name">รูปสินค้า: </label>
-          <input
-            #imageInput
-            type="file"
-            formControlName="file"
-            class="form-control"
-            accept="image/*"
-            (change)="onFileChange($event)"
-          />
-          <br />
-          <img
-            [src]="imageSrc"
-            *ngIf="imageSrc"
-            style="height: 100px; width: 100px; object-fit: cover"
-          />
+          <div class="mt-3">
+            <label for="name">รูปสินค้า: </label>
+            <input
+              #imageInput
+              type="file"
+              formControlName="file"
+              class="form-control"
+              accept="image/*"
+              (change)="onFileChange($event)"
+            />
+            <br />
+            <img
+              [src]="image_src"
+              *ngIf="image_src"
+              style="height: 100px; width: 100px; object-fit: cover"
+            />
+          </div>
         </div>
 
-        <button
-          type="submit"
-          class="btn btn-primary rounded-0 mt-3"
-          [disabled]="!productForm.valid"
-        >
-          บันทึก
-        </button>
+        <div class="text-end">
+          <button
+            type="submit"
+            class="btn btn-primary rounded-0 mt-3"
+            [disabled]="!product_form.valid"
+          >
+            บันทึก
+          </button>
+        </div>
+        <br /><br />
       </form>
     </div>
   </div>

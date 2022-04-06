@@ -6,6 +6,7 @@ export interface Products {
 }
 export interface Data {
   _id: string;
+  product_id: string;
   name: string;
   detail: string;
   image: string;
@@ -19,12 +20,17 @@ export interface Data {
   cost_discount_price: number;
   min_stock: number; //แจ้งเตือน < น้อยกว่า
   enable_rounding: boolean; //เปิดใช้งานปัดเศษ
+  brand: Brand;
 }
 export interface Unit {
-  id: number;
+  _id: number;
+  name: number;
+}
+export interface Brand {
+  _id: number;
   name: number;
 }
 export interface Category {
-  id: number;
+  _id: number;
   name: number;
 }

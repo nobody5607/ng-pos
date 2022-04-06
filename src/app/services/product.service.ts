@@ -26,6 +26,12 @@ export class ProductService {
       catchError(this.handleError<Products>('getProducts'))
     );
   }
+  getProductById(id: any): Observable<Data> {
+    return this.http.get<Data>(`${this.API_URL}/${id}`, this.headerFunc()).pipe(
+      tap((_) => this.log('getProductById')),
+      catchError(this.handleError<Data>('getProductById'))
+    );
+  }
   getAttribute() {
     return this.http.get(this.API_URL + '/attribute').pipe(
       tap((_) => this.log('getattribute')),

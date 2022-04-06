@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../app/services/product.service';
 import { Data } from '../../Interfaces/products';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -8,7 +9,7 @@ import { Data } from '../../Interfaces/products';
 })
 export class ProductComponent implements OnInit {
   products: Data[] = [];
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit(): void {
     this.getProduct();
@@ -22,5 +23,6 @@ export class ProductComponent implements OnInit {
 
   updateForm(product: any) {
     console.log(product);
+    this.router.navigateByUrl(`/create-product/${product._id}`);
   }
 }

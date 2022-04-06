@@ -12,21 +12,23 @@
         />
       </div>
 
-      <div class="product row">
-        <div
-          *ngFor="let product of products; let i = index"
-          class="col-md-3 col-6 mt-1"
-          (click)="addToCart(product)"
-        >
-          <div class="card rounded-0">
-            <div class="card-body">
-              <div class="text-center">
-                <img [src]="product.image" class="img-fluid image-product" />
-              </div>
+      <div class="product container">
+        <div class="row">
+          <div
+            *ngFor="let product of products; let i = index"
+            class="col-md-3 col-6 mt-1"
+            (click)="addToCart(product)"
+          >
+            <div class="card rounded-0">
+              <div class="card-body">
+                <div class="text-center">
+                  <img [src]="product.image" class="img-fluid image-product" />
+                </div>
 
-              <div class="product-text" [title]="product.name">
-                <h6>{{ product.name }}</h6>
-                <div>{{ product.price | currency: "฿" }}</div>
+                <div class="product-text" [title]="product.name">
+                  <h6>{{ product.name }}</h6>
+                  <div>{{ product.price | currency: "฿" }}</div>
+                </div>
               </div>
             </div>
           </div>
