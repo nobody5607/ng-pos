@@ -13,6 +13,7 @@ declare var window: any;
 })
 export class ShopComponent implements OnInit {
   formModal: any;
+  formModalDisprice: any;
   modalSuccess: any;
   payment_return: any;
   products: Data[] = [];
@@ -20,7 +21,12 @@ export class ShopComponent implements OnInit {
   carts: Carts[] = [];
   barcode: string = '';
   totalPrice = 0; //รวมเงิน
+  price = 0; //เงินที่ยังไม่ลด
+  discountPrice = 0; //ส่วนลด
   print_form = false;
+  modal_type: any; //ประเภท คำนวน ส่วนลด หรือ จำนวนสินค้า
+  select_data: any; // คลิงเปลี่ยนแปลงจำนวนสินค้า
+  disabled_btn_checkout = true;
   // totalMoney: any; //เงินทอน
   constructor(
     private productService: ProductService,
@@ -29,6 +35,9 @@ export class ShopComponent implements OnInit {
   ngOnInit(): void {
     this.formModal = new window.bootstrap.Modal(
       document.getElementById('modalCalculator')
+    );
+    this.formModalDisprice = new window.bootstrap.Modal(
+      document.getElementById('formModalDisprice')
     );
     this.modalSuccess = new window.bootstrap.Modal(
       document.getElementById('modalSuccess')
@@ -181,6 +190,11 @@ export class ShopComponent implements OnInit {
     for (let i of this.carts) {
       this.totalPrice += i.product_price * i.product_qty;
     }
+    if (this.totalPrice > 0) {
+      this.disabled_btn_checkout = false;
+    } else {
+      this.disabled_btn_checkout = true;
+    }
   }
 
   //เงินทอน
@@ -194,8 +208,8 @@ export class ShopComponent implements OnInit {
       customer: '6247da6c8904fb3a816373d8',
       orderItems: this.carts,
       discount: {
-        discount_type: '%', //%,฿
-        discount_price: 0, //เงินลด
+        discount_type: '฿', //%,฿
+        discount_price: this.discountPrice, //เงินลด
       },
       coupon: {
         coupon_code: '',
@@ -205,7 +219,7 @@ export class ShopComponent implements OnInit {
       payment_method: 'cash',
       payment_all: payment[1] ? payment[1] : 0,
       payment_return: payment[0] ? payment[0] : 0,
-      price: this.totalPrice,
+      price: this.price,
       totalPrice: this.totalPrice,
     };
     this.payment_return = payment[0];
@@ -225,7 +239,38 @@ export class ShopComponent implements OnInit {
 
   closeOrder() {
     this.totalPrice = 0;
+    this.price = 0;
+    this.discountPrice = 0;
     this.carts = [];
     this.print_form = false;
+  }
+
+  //
+  dispriceFunc(modal_type: any, select_data: any) {
+    this.modal_type = modal_type;
+    this.select_data = select_data;
+    this.formModalDisprice.show();
+  }
+  discountMoneyFunc(data: string) {
+    if (this.modal_type === 'cart') {
+      console.log(this.select_data);
+
+      const checkCart = this.carts.findIndex(
+        (obj) => obj.product_id == this.select_data.product_id
+      );
+      if (checkCart != -1) {
+        this.carts[checkCart].product_qty = parseFloat(data);
+        this.carts[checkCart].total_price =
+          this.carts[checkCart].product_price *
+          this.carts[checkCart].product_qty;
+        this.getTotalPrice();
+      }
+    } else {
+      this.discountPrice = parseFloat(data);
+      this.price = this.totalPrice;
+      this.totalPrice -= this.discountPrice;
+    }
+
+    //this.dis
   }
 }

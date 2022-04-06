@@ -29,12 +29,12 @@
           <button (click)="fullNumber(100)" class="hotkey-button">100</button>
           <button (click)="setDot('.')">.</button>
           <button (click)="setNumber(0)">0</button>
-          <button (click)="remove()">x</button>
+          <button (click)="remove()"><i class="bi bi-x-lg"></i></button>
           <button (click)="fullNumberAll()" class="hotkey-button">เต็ม</button>
 
           <button></button>
           <button></button>
-          <button></button>
+          <button data-bs-dismiss="modal" aria-label="Close">ปิด</button>
           <button
             class="btn btn-primary btn-ok"
             [disabled]="disabledSubmit"
