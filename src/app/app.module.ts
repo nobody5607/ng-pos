@@ -11,6 +11,7 @@ import { ShopComponent } from './components/shop/shop.component';
 
 import { FormsModule } from '@angular/forms';
 import { CalculatorComponent } from './components/calculator/calculator.component';
+import { CalcDiscountComponent } from './components/calc-discount/calc-discount.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +20,7 @@ import { CalculatorComponent } from './components/calculator/calculator.componen
     PostDetailComponent,
     ShopComponent,
     CalculatorComponent,
+    CalcDiscountComponent,
   ],
   imports: [HttpClientModule, BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

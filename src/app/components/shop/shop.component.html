@@ -1,52 +1,31 @@
 <div class="row">
   <div class="col-md-8 col-6">
-    <div id="filter">
-      <div class="row">
-        <div class="col-4">
-          <div>
-            <div class="input-group mb-3">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Scan Barcode (F12)"
-                [(ngModel)]="barcode"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="col-8">
-          <div>
-            <div class="input-group mb-3">
-              <input
-                type="text"
-                class="form-control"
-                aria-label="Dollar amount (with dot and two decimal places)"
-                placeholder="ค้าหาสินค้า"
-              />
-              <span class="input-group-text"><i class="bi bi-search"></i></span>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="mb-3 col-8 mx-auto">
+      <input
+        type="text"
+        class="form-control rounded-0"
+        aria-label="Dollar amount (with dot and two decimal places)"
+        placeholder="ค้าหาสินค้า"
+        [(ngModel)]="barcode"
+        (ngModelChange)="scanBarcode($event)"
+      />
     </div>
-    <div id="product">
-      <div class="row">
-        <div
-          *ngFor="let product of products; let i = index"
-          class="col-md-3 col-6 mt-1"
-          (click)="addToCart(product)"
-        >
-          <div class="card">
-            <div class="card-body">
-              <div class="text-center">
-                <img [src]="product.image" class="img-fluid image-product" />
-              </div>
+
+    <div class="product row">
+      <div
+        *ngFor="let product of products; let i = index"
+        class="col-md-3 col-6 mt-1"
+        (click)="addToCart(product)"
+      >
+        <div class="card rounded-0">
+          <div class="card-body">
+            <div class="text-center">
+              <img [src]="product.image" class="img-fluid image-product" />
             </div>
-            <div class="card-footer">
-              <div class="product-text" [title]="product.name">
-                {{ product.name }}
-                <div>{{ product.price | currency: "฿" }}</div>
-              </div>
+
+            <div class="product-text" [title]="product.name">
+              <h6>{{ product.name }}</h6>
+              <div>{{ product.price | currency: "฿" }}</div>
             </div>
           </div>
         </div>
@@ -54,7 +33,7 @@
     </div>
   </div>
   <div class="col-md-4 col-6">
-    <div class="card">
+    <div class="card rounded-0">
       <div class="card-body">
         <div class="row">
           <div
@@ -92,7 +71,7 @@
         </div>
       </div>
     </div>
-    <div class="card mt-3 cart-list">
+    <div class="card rounded-0 mt-3 cart-list">
       <div class="card-body">
         <div *ngIf="carts && carts.length > 0; else elseBlock">
           <div class="row cart-product" *ngFor="let c of carts; let i = index">
@@ -102,7 +81,7 @@
               </div>
               <div>
                 <button
-                  class="btn btn-sm btn-danger"
+                  class="btn text-danger"
                   (click)="removeCart(c.product_id)"
                 >
                   <i class="bi bi-trash"></i>
@@ -113,7 +92,7 @@
               <div class="text-nowrap">
                 <b>{{ c.product_price | currency: "฿" }}</b>
               </div>
-              <div class="text-nowrap">x{{ c.product_qty }}</div>
+              <div class="text-nowrap">x{{ c.product_qty }} {{ c.unit }}</div>
             </div>
           </div>
           <!-- endfor -->
@@ -157,7 +136,11 @@
               <i class="bi bi-printer"></i> พิมพ์ใบเสร็จ
             </button>
 
-            <button class="btn btn-secondary" data-bs-dismiss="modal">
+            <button
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+              (click)="closeOrder()"
+            >
               ปิดการขาย
             </button>
           </div>
@@ -180,28 +163,22 @@
       <div class="header-sub-title text-centers">(VAT Included)</div>
       <hr />
       <div>
-        <div class="list">
-          <div>sfdsf 1กก.</div>
-          <div class="text-rights">500.00</div>
-        </div>
-        <div class="list">
-          <div>sfdsf 1กก.</div>
-          <div class="text-rights">500.00</div>
-        </div>
-        <div class="list">
-          <div>sfdsf 1กก.</div>
-          <div class="text-rights">500.00</div>
+        <div class="list" *ngFor="let c of carts; let i = index">
+          <div>{{ c.product_name }} {{ c.product_qty }}{{ c.unit }}</div>
+          <div class="text-rights">
+            {{ c.product_price * c.product_qty | currency: "฿" }}
+          </div>
         </div>
       </div>
       <hr />
       <div class="list">
         <div>รวม</div>
-        <div class="text-rights">500.00</div>
+        <div class="text-rights">{{ totalPrice | currency: "฿" }}</div>
       </div>
       <hr />
       <div class="list">
         <div>NonVAT</div>
-        <div class="text-rights">500.00</div>
+        <div class="text-rights">{{ totalPrice | currency: "฿" }}</div>
       </div>
       <div class="list">
         <div>VATable</div>
@@ -213,16 +190,16 @@
       </div>
       <div class="list">
         <div>สุทธิ</div>
-        <div class="text-rights">500.00</div>
+        <div class="text-rights">{{ totalPrice | currency: "฿" }}</div>
       </div>
       <hr />
       <div class="list">
         <div>เงินสด</div>
-        <div class="text-rights">500.00</div>
+        <div class="text-rights">{{ totalPrice | currency: "฿" }}</div>
       </div>
       <div class="list">
         <div>เงินทอน</div>
-        <div class="text-rights">0.00</div>
+        <div class="text-rights">{{ payment_return | currency: "฿" }}</div>
       </div>
       <div class="list">
         <div>ชำระด้วย</div>

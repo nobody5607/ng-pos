@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../app/services/product.service';
-import { Products, Data } from '../../Interfaces/products';
+import { Data } from '../../Interfaces/products';
 import { OrderData } from '../../Interfaces/order';
 import { Carts } from '../../Interfaces/carts';
 import { OrderService } from '../../services/order.service';
-import Swal from 'sweetalert2';
 
 declare var window: any;
 @Component({
@@ -35,7 +34,7 @@ export class ShopComponent implements OnInit {
       document.getElementById('modalSuccess')
     );
 
-    this.getPosts();
+    this.getProduct();
 
     // this.formModal.show();
   }
@@ -113,7 +112,7 @@ export class ShopComponent implements OnInit {
     setTimeout(() => {
       a.onafterprint = a.close;
       a.print();
-      this.print_form = false;
+      //this.print_form = false;
     }, 100);
   }
 
@@ -122,18 +121,32 @@ export class ShopComponent implements OnInit {
     this.formModal.show();
   }
   //แสดงสินค้า
-  getPosts(): void {
+  getProduct(): void {
     this.productService.getProduct().subscribe((res) => {
       this.products = res.data;
     });
   }
+  scanBarcode(e: any) {
+    if (this.barcode.length >= 5) {
+      this.getProductByBarcode();
+    }
+  }
+  getProductByBarcode(): void {
+    this.productService.getProuctByBarcode(this.barcode).subscribe((res) => {
+      if (res) {
+        this.addToCart(res);
+        this.barcode = '';
+      }
+    });
+  }
   //เพิ่มลงตะกร้า
-  addToCart(product: Data) {
+  addToCart(product: any) {
     const cartObj = {
       product_id: product._id,
       product_name: product.name,
       product_qty: 1,
       product_price: product.price,
+      unit: product.units.name ? product.units.name.toString() : '',
       product_cost: product.cost,
       barcode_code: product.barcode_code,
       product_image: product.image,
@@ -154,7 +167,7 @@ export class ShopComponent implements OnInit {
         this.carts.push(cartObj);
       }
     }
-
+    //console.log(this.carts);
     this.getTotalPrice();
   }
   //ลบตะกร้า
@@ -164,10 +177,12 @@ export class ShopComponent implements OnInit {
   }
   //รวมเงิน
   getTotalPrice() {
+    this.totalPrice = 0;
     for (let i of this.carts) {
       this.totalPrice += i.product_price * i.product_qty;
     }
   }
+
   //เงินทอน
   submitOrder(money: string) {
     console.log(this.carts);
@@ -206,5 +221,11 @@ export class ShopComponent implements OnInit {
       },
       error: (error) => console.error(error),
     });
+  }
+
+  closeOrder() {
+    this.totalPrice = 0;
+    this.carts = [];
+    this.print_form = false;
   }
 }

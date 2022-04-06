@@ -1,3 +1,6 @@
+html{
+    overflow: hidden;
+}
 .image-product{
     width: 100px;
     height: 100px;
@@ -10,12 +13,12 @@
     text-overflow: ellipsis;    
     font-size: 12px;
 }
-#product .col-md-3{
+.product .col-md-3{
     padding:3px 3px 0px 3px;
     cursor: pointer;
 }
-#product{
-    height: 90vh;
+.product{
+    height: 80vh;
     overflow-x: hidden;
     overflow-y: auto;
     padding-left: 15px;
@@ -37,6 +40,7 @@
     font-size: 12px;
     border-bottom: 1px solid #d8dcdf;
     padding-bottom: 10px;
+    padding-top: 10px;
 }
 .cart-product-text{
     white-space: nowrap;
@@ -50,4 +54,7 @@
 
 .swal-wide{
     width:250px !important;
+}
+.active {
+    border-color: #116aef;
 }

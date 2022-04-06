@@ -17,6 +17,13 @@ export class ProductService {
       catchError(this.handleError<Products>('getProducts'))
     );
   }
+
+  getProuctByBarcode(barcode: any): Observable<Products> {
+    return this.http.get<Products>(`${this.API_URL}/barcode/${barcode}`).pipe(
+      tap((_) => this.log('getProduct')),
+      catchError(this.handleError<Products>('getProducts'))
+    );
+  }
   private log(message: string) {
     console.log(message);
   }

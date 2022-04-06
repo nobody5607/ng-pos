@@ -12,7 +12,7 @@ export interface Data {
   price: number; //ราคา
   category: Category[]; //หมวดหมู่
   stock: number; //จำนวน
-  unit: Category[]; //หน่วย
+  units: Unit; //หน่วย
   weight: number; //น้ำหนัก
   barcode_code: string; //บาร์โค้ด (กำหนดเอง)
   cost_discount_price: number;

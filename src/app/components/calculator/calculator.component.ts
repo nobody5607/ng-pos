@@ -95,5 +95,6 @@ export class CalculatorComponent implements OnInit {
     let total = parseFloat(this.totalNumber) - this.totalPrice;
     this.totalMoney.emit(total.toString() + '|' + this.totalNumber); //เงินทอน|จำนวนเงินที่จ่าย
     //this.formModal.hide();
+    this.clear();
   }
 }
