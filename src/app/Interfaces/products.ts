@@ -7,10 +7,11 @@ export interface Products {
 export interface Data {
   _id: string;
   name: string;
+  detail: string;
   image: string;
   cost: number; //ต้นทุน
   price: number; //ราคา
-  category: Category[]; //หมวดหมู่
+  categorys: Category; //หมวดหมู่
   stock: number; //จำนวน
   units: Unit; //หน่วย
   weight: number; //น้ำหนัก

@@ -12,6 +12,11 @@ import { ShopComponent } from './components/shop/shop.component';
 import { FormsModule } from '@angular/forms';
 import { CalculatorComponent } from './components/calculator/calculator.component';
 import { CalcDiscountComponent } from './components/calc-discount/calc-discount.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { ProductComponent } from './components/product/product.component';
+import { CreateProductComponent } from './components/create-product/create-product.component';
+
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,8 +26,17 @@ import { CalcDiscountComponent } from './components/calc-discount/calc-discount.
     ShopComponent,
     CalculatorComponent,
     CalcDiscountComponent,
+    LoginComponent,
+    ProductComponent,
+    CreateProductComponent,
   ],
-  imports: [HttpClientModule, BrowserModule, AppRoutingModule, FormsModule],
+  imports: [
+    HttpClientModule,
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

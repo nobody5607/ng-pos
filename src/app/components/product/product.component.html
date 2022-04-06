@@ -1,0 +1,53 @@
+<div class="container">
+  <h1>
+    รายการสินค้า &nbsp;<a
+      routerLink="/create-product"
+      routerLinkActive="router-link-active"
+      class="btn btn-success rounded-0"
+      >เพิ่มสินค้า</a
+    >
+  </h1>
+  <div class="product row">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th class="text-center">ชื่อสินค้า</th>
+            <th class="text-center">หมวดหมู่</th>
+            <th class="text-center">จำนวน</th>
+            <th class="text-center">ราคาต้นทุน</th>
+            <th class="text-center">ราคาขาย</th>
+            <th class="text-center">หน่วย</th>
+            <th class="text-center">น้ำหนัก</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products; let i = index">
+            <td>
+              <button (click)="updateForm(product)" class="btn btn-info btn-sm">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+            </td>
+            <td>
+              <img
+                [src]="product.image"
+                style="width: 50px; height: 50px; object-fit: cover"
+              />
+            </td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.categorys ? product.categorys.name : "" }}</td>
+            <td class="text-end">{{ product.stock }}</td>
+            <td class="text-end">{{ product.cost | currency: "฿" }}</td>
+            <td class="text-end">{{ product.price | currency: "฿" }}</td>
+            <td class="text-end">
+              {{ product.units ? product.units.name : "" }}
+            </td>
+            <td class="text-end">{{ product.weight }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
