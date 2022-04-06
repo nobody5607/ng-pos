@@ -21,6 +21,7 @@ export class ShopComponent implements OnInit {
   carts: Carts[] = [];
   barcode: string = '';
   totalPrice = 0; //รวมเงิน
+  print_form = false;
   // totalMoney: any; //เงินทอน
   constructor(
     private productService: ProductService,
@@ -35,7 +36,85 @@ export class ShopComponent implements OnInit {
     );
 
     this.getPosts();
+
     // this.formModal.show();
+  }
+
+  print() {
+    this.print_form = true;
+    var divContents = window.document.getElementById('print').innerHTML;
+    let w = 1000;
+    let h = 768;
+
+    var left = screen.width / 2 - w / 2;
+    var top = screen.height / 2 - h / 2;
+    var a = window.open(
+      '',
+      '',
+      'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=' +
+        w +
+        ', height=' +
+        h +
+        ', top=' +
+        top +
+        ', left=' +
+        left
+    );
+    a.document.write('<html>');
+    a.document.write('<html><head><title></title>');
+    a.document.write(
+      `
+        <style> 
+              @media print {
+
+                @page {
+                  margin: 0;
+                  size: A4 portrait;  
+                }
+                body{
+                  padding:0;
+                  margin:0;
+                }
+                .page{
+                  padding:0;
+                  margin:0;
+                  width:320px; 
+                  margin-top:5px;
+                }
+                .text-centers{text-align:center;}
+                .text-rights{text-align:right;}
+                .list{
+                  padding:3px;
+                  display:flex;
+                  justify-content: space-between;
+                }
+              }
+
+              .page{
+                padding:0;
+                margin:0;
+                width:320px; 
+                margin-top:5px;
+              }
+              .text-centers{text-align:center;}
+              .text-rights{text-align:right;}
+              .list{
+                padding:3px;
+                display:flex;
+                justify-content: space-between;
+              }
+        </style>
+      `
+    );
+    a.document.write('</head><body >');
+    a.document.write(divContents);
+    a.document.write('</body></html>');
+    a.document.close();
+    setTimeout(() => {
+      a.onafterprint = a.close;
+      a.print();
+      this.print_form = false;
+    }, 100);
   }
 
   //แสดง modal เครื่องคิดเลข
@@ -120,8 +199,11 @@ export class ShopComponent implements OnInit {
 
     let formData = new FormData();
     formData.append('data', JSON.stringify(order));
+
     this.orderService.createOrder(formData).subscribe({
-      next: (response) => console.log(response),
+      next: (response) => {
+        this.print_form = true;
+      },
       error: (error) => console.error(error),
     });
   }

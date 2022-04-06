@@ -153,7 +153,7 @@
 
         <div class="row justify-content-center mt-3">
           <div class="col-md-6 d-grid gap-2">
-            <button class="btn btn-primary">
+            <button class="btn btn-primary" (click)="print()">
               <i class="bi bi-printer"></i> พิมพ์ใบเสร็จ
             </button>
 
@@ -162,6 +162,93 @@
             </button>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="print" *ngIf="print_form">
+  <div class="page">
+    <div>
+      <div class="header-name text-centers">Nuttaphon Chanpan</div>
+      <div class="header-branch text-centers">สาขา สำนักงานใหญ่</div>
+      <div class="header-tax text-centers">TAX# 1409700109776</div>
+
+      <div class="header-title text-centers">
+        ใบเสร็จรับเงิน/ใบกำกับภาษีอย่างย่อ
+      </div>
+      <div class="header-sub-title text-centers">(VAT Included)</div>
+      <hr />
+      <div>
+        <div class="list">
+          <div>sfdsf 1กก.</div>
+          <div class="text-rights">500.00</div>
+        </div>
+        <div class="list">
+          <div>sfdsf 1กก.</div>
+          <div class="text-rights">500.00</div>
+        </div>
+        <div class="list">
+          <div>sfdsf 1กก.</div>
+          <div class="text-rights">500.00</div>
+        </div>
+      </div>
+      <hr />
+      <div class="list">
+        <div>รวม</div>
+        <div class="text-rights">500.00</div>
+      </div>
+      <hr />
+      <div class="list">
+        <div>NonVAT</div>
+        <div class="text-rights">500.00</div>
+      </div>
+      <div class="list">
+        <div>VATable</div>
+        <div class="text-rights">0.00</div>
+      </div>
+      <div class="list">
+        <div>VAT 7%</div>
+        <div class="text-rights">0.00</div>
+      </div>
+      <div class="list">
+        <div>สุทธิ</div>
+        <div class="text-rights">500.00</div>
+      </div>
+      <hr />
+      <div class="list">
+        <div>เงินสด</div>
+        <div class="text-rights">500.00</div>
+      </div>
+      <div class="list">
+        <div>เงินทอน</div>
+        <div class="text-rights">0.00</div>
+      </div>
+      <div class="list">
+        <div>ชำระด้วย</div>
+        <div class="text-rights">เงินสด</div>
+      </div>
+      <hr />
+      <div class="list">
+        <div>พนักงานขาย</div>
+        <div class="text-rights">Chanpan Nuttaphon</div>
+      </div>
+      <div class="list">
+        <div>ลูกค้า</div>
+        <div class="text-rights">Chanpan Nuttaphon</div>
+      </div>
+      <div class="list">
+        <div>จุดขาย</div>
+        <div class="text-rights">POS #1</div>
+      </div>
+      <div class="list">
+        <div>เลขที่</div>
+        <div class="text-rights">ST65000001</div>
+      </div>
+
+      <div>
+        <br />
+        <div class="text-centers">** วันที่ 06/04/2022 11:14:49 **</div>
       </div>
     </div>
   </div>
