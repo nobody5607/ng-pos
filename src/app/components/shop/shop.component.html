@@ -127,9 +127,42 @@
 </div>
 
 <!--form modal-->
-<div>ok {{ totalMoney }}</div>
+
 <app-calculator
   [totalPrice]="totalPrice"
   [formModal]="formModal"
   (totalMoney)="submitOrder($event)"
 ></app-calculator>
+
+<div
+  class="modal fade"
+  id="modalSuccess"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel2"
+  aria-hidden="true"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <h1 class="text-center">
+          <i style="color: green" class="bi bi-check-circle-fill"></i>
+        </h1>
+        <h1 class="text-center">ทอน ฿ {{ payment_return }}</h1>
+
+        <div class="row justify-content-center mt-3">
+          <div class="col-md-6 d-grid gap-2">
+            <button class="btn btn-primary">
+              <i class="bi bi-printer"></i> พิมพ์ใบเสร็จ
+            </button>
+
+            <button class="btn btn-secondary" data-bs-dismiss="modal">
+              ปิดการขาย
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

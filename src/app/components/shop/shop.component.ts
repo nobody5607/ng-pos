@@ -4,6 +4,7 @@ import { Products, Data } from '../../Interfaces/products';
 import { OrderData } from '../../Interfaces/order';
 import { Carts } from '../../Interfaces/carts';
 import { OrderService } from '../../services/order.service';
+import Swal from 'sweetalert2';
 
 declare var window: any;
 @Component({
@@ -13,12 +14,14 @@ declare var window: any;
 })
 export class ShopComponent implements OnInit {
   formModal: any;
+  modalSuccess: any;
+  payment_return: any;
   products: Data[] = [];
   order?: OrderData;
   carts: Carts[] = [];
   barcode: string = '';
   totalPrice = 0; //รวมเงิน
-  totalMoney: any; //เงินทอน
+  // totalMoney: any; //เงินทอน
   constructor(
     private productService: ProductService,
     private orderService: OrderService
@@ -27,6 +30,10 @@ export class ShopComponent implements OnInit {
     this.formModal = new window.bootstrap.Modal(
       document.getElementById('modalCalculator')
     );
+    this.modalSuccess = new window.bootstrap.Modal(
+      document.getElementById('modalSuccess')
+    );
+
     this.getPosts();
     // this.formModal.show();
   }
@@ -87,7 +94,8 @@ export class ShopComponent implements OnInit {
     console.log(this.carts);
     console.log(Math.round(parseFloat(money)));
     console.log(money); //เงินทอน
-    console.log(this.totalPrice);
+    let payment = money.split('|');
+
     let order = {
       customer: '6247da6c8904fb3a816373d8',
       orderItems: this.carts,
@@ -101,9 +109,15 @@ export class ShopComponent implements OnInit {
       },
       vat: 0,
       payment_method: 'cash',
-      price: 0,
-      totalPrice: 0,
+      payment_all: payment[1] ? payment[1] : 0,
+      payment_return: payment[0] ? payment[0] : 0,
+      price: this.totalPrice,
+      totalPrice: this.totalPrice,
     };
+    this.payment_return = payment[0];
+    this.formModal.hide();
+    this.modalSuccess.show();
+
     let formData = new FormData();
     formData.append('data', JSON.stringify(order));
     this.orderService.createOrder(formData).subscribe({
