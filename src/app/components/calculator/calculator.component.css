@@ -3,7 +3,7 @@
     padding: 0;
 }
 button.btn.btn-primary.btn-ok {
-    background: #00d0ff;
+    background: #109a66;
     border-radius: 0px;
     color: #fff;
 }
@@ -48,5 +48,5 @@ button.btn.btn-primary.btn-ok {
     background-color: #f2f5f7!important;
 }
 .hotkey-button {
-    color: #0075b2!important;
+    color: #109a66 !important;
 }
