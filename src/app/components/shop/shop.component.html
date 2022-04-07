@@ -1,33 +1,49 @@
-<div id="shop">
+<div id="shop" class="container">
   <div class="row py-3">
     <div class="col-md-8 col-6">
-      <div class="mb-3 col-8 mx-auto">
-        <input
-          type="text"
-          class="form-control rounded-0"
-          aria-label="Dollar amount (with dot and two decimal places)"
-          placeholder="Scan Barcode"
-          [(ngModel)]="barcode"
-          (ngModelChange)="scanBarcode($event)"
-        />
-      </div>
-
-      <div class="product container">
-        <div class="row">
-          <div
-            *ngFor="let product of products; let i = index"
-            class="col-md-3 col-6 mt-1"
-            (click)="addToCart(product)"
-          >
-            <div class="card rounded-0">
-              <div class="card-body">
-                <div class="text-center">
-                  <img [src]="product.image" class="img-fluid image-product" />
+      <div class="card">
+        <div class="car-body">
+          <div class="product container">
+            <div class="row">
+              <div class="col-12">
+                <div class="row mb-3 mt-3 justify-content-end">
+                  <div class="col-md-6 col-6">
+                    <input
+                      type="text"
+                      class="form-control rounded-10"
+                      placeholder="Search iteams here..."
+                      [(ngModel)]="barcode"
+                      (ngModelChange)="scanBarcode($event)"
+                    />
+                  </div>
+                  <div class="col-md-1 col-3">
+                    <button class="btn btn-success rounded-10">
+                      <i class="bi bi-search"></i>
+                    </button>
+                  </div>
                 </div>
+              </div>
+              <div
+                *ngFor="let product of products; let i = index"
+                class="col-md-2 col-6 mt-1 cursor-pointer"
+                (click)="addToCart(product)"
+              >
+                <div class="">
+                  <div class="">
+                    <div class="text-center product-image">
+                      <img
+                        [src]="product.image"
+                        class="img-fluid image-product"
+                      />
+                    </div>
 
-                <div class="product-text" [title]="product.name">
-                  <h6>{{ product.name }}</h6>
-                  <div>{{ product.price | currency: "฿" }}</div>
+                    <div class="product-text" [title]="product.name">
+                      <div class="product-name">{{ product.name }}</div>
+                      <div class="product-price">
+                        {{ product.price | currency: "฿" }}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -36,6 +52,45 @@
       </div>
     </div>
     <div class="col-md-4 col-6">
+      <div class="card rounded-0 mb-3 cart-list">
+        <div class="card-body p-0">
+          <h5 class="text-center mt-3 mb-3">Checkout</h5>
+          <table class="table table-card">
+            <thead>
+              <tr>
+                <th class="text-center">Name</th>
+                <th class="text-center">QTY</th>
+                <th class="text-center">Price</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="carts && carts.length > 0">
+              <tr
+                *ngFor="let c of carts; let i = index"
+                (click)="dispriceFunc('cart', c)"
+              >
+                <td>
+                  <div class="product-name">
+                    <b
+                      ><i
+                        (click)="removeCart(c.product_id)"
+                        class="bi bi-trash"
+                      ></i>
+                      {{ i + 1 }}.</b
+                    >
+                    {{ c.product_name }}
+                  </div>
+                </td>
+                <td style="white-space: nowrap">
+                  {{ c.product_qty }} {{ c.unit }}
+                </td>
+                <td>
+                  <b>{{ c.product_price | currency: "฿" }}</b>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="card rounded-0">
         <div class="card-body">
           <div class="row">
@@ -45,9 +100,9 @@
             >
               ลด ฿
             </div>
-            <div class="col-md-9 col-8">
+            <div class="col-md-9 col-8 text-end">
               <h3
-                class="text-muted text-nowrap"
+                class="text-muted text-nowrap cursor-pointer"
                 (click)="dispriceFunc('discount', '')"
               >
                 {{ discountPrice }}
@@ -62,7 +117,7 @@
             >
               รวม
             </div>
-            <div class="col-md-9 col-8">
+            <div class="col-md-9 col-8 text-end">
               <del class="text-danger text-nowrap" *ngIf="price > 0">{{
                 price | currency: "฿"
               }}</del>
@@ -74,48 +129,12 @@
           <div class="d-grid gap-2 mt-3">
             <button
               [disabled]="disabled_btn_checkout"
-              class="btn btn-primary btn-lg text-nowrap btn-xl rounded-0"
+              class="btn btn-success btn-lg text-nowrap btn-xl"
               (click)="checkout()"
             >
               ชำระเงิน
             </button>
           </div>
-        </div>
-      </div>
-      <div class="card rounded-0 mt-3 cart-list">
-        <div class="card-body">
-          <div *ngIf="carts && carts.length > 0; else elseBlock">
-            <div
-              class="row cart-product"
-              *ngFor="let c of carts; let i = index"
-            >
-              <div class="col-md-7 col-6 cart-product-text">
-                <div>
-                  <b>{{ i + 1 }}.</b> {{ c.product_name }}
-                </div>
-                <div>
-                  <button
-                    class="btn btn btn-outline-danger"
-                    (click)="removeCart(c.product_id)"
-                  >
-                    <i class="bi bi-trash"></i>
-                  </button>
-                </div>
-              </div>
-              <div class="col-md-5 col-6 text-end">
-                <div class="text-nowrap">
-                  <b>{{ c.product_price | currency: "฿" }}</b>
-                </div>
-                <div class="text-nowrap" (click)="dispriceFunc('cart', c)">
-                  {{ c.product_qty }} {{ c.unit }}
-                </div>
-              </div>
-            </div>
-            <!-- endfor -->
-          </div>
-          <ng-template #elseBlock
-            ><h5 class="text-center">รอการขายอยู่จ้า</h5></ng-template
-          >
         </div>
       </div>
     </div>

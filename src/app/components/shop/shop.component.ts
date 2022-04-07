@@ -54,8 +54,8 @@ export class ShopComponent implements OnInit {
     let w = 1000;
     let h = 768;
 
-    var left = screen.width / 2 - w / 2;
-    var top = screen.height / 2 - h / 2;
+    var left = window.screen.width / 2 - w / 2;
+    var top = window.screen.height / 2 - h / 2;
     var a = window.open(
       '',
       '',
@@ -167,7 +167,7 @@ export class ShopComponent implements OnInit {
       const checkCart = this.carts.findIndex(
         (obj) => obj.product_id == product._id
       );
-      if (checkCart != -1) {
+      if (checkCart !== -1) {
         this.carts[checkCart].product_qty += 1;
         this.carts[checkCart].total_price =
           this.carts[checkCart].product_price *

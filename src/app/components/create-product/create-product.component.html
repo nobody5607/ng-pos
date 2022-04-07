@@ -5,6 +5,14 @@
 
       <form [formGroup]="product_form" (ngSubmit)="onSubmit()">
         <div style="height: 50vh; overflow-y: scroll">
+          <div class="mt-3">
+            <label>Barcode: </label>
+            <input
+              type="text"
+              formControlName="barcode_code"
+              class="form-control"
+            />
+          </div>
           <div class="mt-3" *ngIf="attribute">
             <label>แบรนด์: </label>
             <select formControlName="brand" class="form-control">
@@ -63,14 +71,7 @@
             <label>น้ำหน้า: </label>
             <input type="text" formControlName="weight" class="form-control" />
           </div>
-          <div class="mt-3">
-            <label>Barcode: </label>
-            <input
-              type="text"
-              formControlName="barcode_code"
-              class="form-control"
-            />
-          </div>
+
           <!-- <div class="mt-3">
           <label>cost_discount_price: </label>
           <input
