@@ -92,3 +92,11 @@
     font-size: 14px;
     font-family: sans-serif;  
 }
+.product-list:active, .product-list:focus, .product-list:visited{
+    border: 1px solid #198754;
+}
+
+.table-card>tbody>tr:hover, .table-card>tbody>tr:visited , .table-card>tbody>tr:active {
+    border-bottom: 1px solid #198754;
+    cursor: pointer;
+}
