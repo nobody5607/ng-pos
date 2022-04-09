@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h5>เพิ่มลูกค้า</h5>
+
+      <form [formGroup]="customer_form" (ngSubmit)="onSubmit()">
+        <div class="row mb-3">
+          <div class="col-6">
+            <div class="text-start">
+              <!-- <a
+                routerLink="/customer"
+                class="btn btn-secondary rounded-0 mt-3"
+              >
+                <i class="bi bi-chevron-left"></i> ยกเลิก
+              </a> -->
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="text-end">
+              <button
+                type="submit"
+                class="btn btn-primary rounded-0 mt-3"
+                [disabled]="!customer_form.valid"
+              >
+                บันทึก <i class="bi bi-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="height: 80vh; overflow-y: scroll">
+          <div class="card-body">
+            <div class="mt-3">
+              <label for="member_id">รหัสบัตรสมาชิก (5 ตัวขึ้นไป): </label>
+              <input
+                type="text"
+                formControlName="member_id"
+                class="form-control"
+                [readonly]="customer_id != '' ? true : false"
+              />
+            </div>
+            <div class="mt-3">
+              <label for="firstname">ชื่อ: </label>
+              <input
+                type="text"
+                formControlName="firstname"
+                class="form-control"
+              />
+            </div>
+            <div class="mt-3">
+              <label for="lastname">นามสกุล: </label>
+              <input
+                type="text"
+                formControlName="lastname"
+                class="form-control"
+              />
+            </div>
+            <div class="mt-3">
+              <label for="gender">เพศ: </label>
+              <div>
+                <input
+                  type="radio"
+                  id="no_gender"
+                  name="sex"
+                  value="no_gender"
+                  formControlName="sex"
+                /><label for="no_gender" class="gender-label">ไม่ระบุ</label
+                ><input
+                  type="radio"
+                  id="gender_m"
+                  name="sex"
+                  value="female"
+                  formControlName="sex"
+                /><label for="gender_m" class="gender-label">หญิง</label
+                ><input
+                  type="radio"
+                  id="gender_f"
+                  name="sex"
+                  value="male"
+                  formControlName="sex"
+                /><label for="gender_f" class="gender-label">ชาย</label>
+              </div>
+            </div>
+            <div class="mt-3">
+              <label for="phone">เบอร์มือถือ: </label>
+              <input type="text" formControlName="phone" class="form-control" />
+            </div>
+          </div>
+        </div>
+
+        <br /><br />
+      </form>
+    </div>
+  </div>
+</div>

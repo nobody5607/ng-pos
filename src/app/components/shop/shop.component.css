@@ -25,7 +25,7 @@
     cursor: pointer;
 }
 .product{
-    height: 80vh;
+    height: 70vh;
     overflow-x: hidden;
     overflow-y: auto;
     padding-left: 15px;

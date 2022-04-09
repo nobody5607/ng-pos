@@ -24,13 +24,13 @@ export interface Data {
 }
 export interface Unit {
   _id: number;
-  name: number;
+  name: string;
 }
 export interface Brand {
   _id: number;
-  name: number;
+  name: string;
 }
 export interface Category {
   _id: number;
-  name: number;
+  name: string;
 }

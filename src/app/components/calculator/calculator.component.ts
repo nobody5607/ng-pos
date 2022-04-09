@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { CustomerService } from '../../services/customer.service';
+import { CustomerData } from '../../Interfaces/customer';
 
 @Component({
   selector: 'app-calculator',
@@ -13,7 +15,13 @@ export class CalculatorComponent implements OnInit {
 
   disabledSubmit = true;
   totalNumber = '0';
-  constructor() {}
+  showMember = false;
+  member_id = '';
+  customer!: CustomerData;
+  customer_message = 'ค้นหาหมายเลขสมาชิก';
+
+  select_member = '';
+  constructor(private customerService: CustomerService) {}
   ngOnInit(): void {}
 
   //จำนวนเงินเป็นตัวเลข
@@ -84,6 +92,7 @@ export class CalculatorComponent implements OnInit {
   }
   //ล้างข้อมูล
   clear() {
+    this.select_member = '';
     this.totalNumber = '0';
     this.checkNumber();
   }
@@ -92,9 +101,58 @@ export class CalculatorComponent implements OnInit {
   submit() {
     //totalPrice ยอดเงินค่าสินค้า
     //totalNumber ยอดเงินที่จ่าย
+    let member = '';
+    if (this.select_member) {
+      member = `|${this.select_member}`;
+    }
     let total = parseFloat(this.totalNumber) - this.totalPrice;
-    this.totalMoney.emit(total.toString() + '|' + this.totalNumber); //เงินทอน|จำนวนเงินที่จ่าย 10|100
+    this.totalMoney.emit(total.toString() + '|' + this.totalNumber + member); //เงินทอน|จำนวนเงินที่จ่าย 10|100
     //this.formModal.hide();
     this.clear();
+  }
+
+  closeModal() {
+    this.clear();
+    this.formModal.hide();
+  }
+
+  //member
+  back() {
+    this.showMember = false;
+  }
+  filterMember() {
+    this.showMember = true;
+  }
+  searchMemberById() {
+    if (this.member_id.length >= 5) {
+      //  this.cus
+      this.customerService.searchCustomer(this.member_id).subscribe({
+        next: (response: any) => {
+          this.customer_message = '';
+          if (response.status === 'success') {
+            this.customer = response.data;
+            this.member_id = response.data.member_id;
+            console.log(this.customer);
+          } else if (response.status === 'warning') {
+            console.log(response.message);
+            this.customer_message = response.message;
+          }
+        },
+        error: (error) => {
+          this.customer_message = '';
+          console.log(error);
+        },
+      });
+    }
+  }
+  selectMember() {
+    this.select_member = this.customer._id;
+    this.showMember = false;
+  }
+
+  selectMemberIdOnRegister(id: string) {
+    this.member_id = id;
+    this.searchMemberById();
+    (document.getElementById('home-tab') as HTMLFormElement).click();
   }
 }

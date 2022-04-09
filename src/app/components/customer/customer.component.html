@@ -1,0 +1,48 @@
+<div class="container">
+  <h1>
+    ข้อมูลลูกค้า &nbsp;<a
+      routerLink="/create-customer"
+      routerLinkActive="router-link-active"
+      class="btn btn-success rounded-0"
+      >เพิ่มลูกค้า
+    </a>
+  </h1>
+
+  <div class="product row" style="height: 80vh; overflow-y: scroll">
+    <div class="card">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th></th>
+                <th class="text-center">รหัสลูกค้า</th>
+                <th class="text-center">ชื่อ</th>
+                <th class="text-center">นามสกุล</th>
+                <th class="text-center">เพศ</th>
+                <th class="text-center">เบอร์โทรศัพ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let c of customers; let i = index">
+                <td>
+                  <button
+                    (click)="updateForm(c._id)"
+                    class="btn btn-info btn-sm"
+                  >
+                    <i class="bi bi-pencil-square"></i>
+                  </button>
+                </td>
+                <td>{{ c.member_id }}</td>
+                <td>{{ c.firstname }}</td>
+                <td>{{ c.lastname }}</td>
+                <td class="text-end">{{ c.sex }}</td>
+                <td class="text-end">{{ c.phone }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

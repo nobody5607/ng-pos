@@ -4,6 +4,7 @@ import { Data } from '../../Interfaces/products';
 import { OrderData } from '../../Interfaces/order';
 import { Carts } from '../../Interfaces/carts';
 import { OrderService } from '../../services/order.service';
+import Swal from 'sweetalert2';
 
 declare var window: any;
 @Component({
@@ -202,10 +203,11 @@ export class ShopComponent implements OnInit {
     console.log(this.carts);
     console.log(Math.round(parseFloat(money)));
     console.log(money); //เงินทอน
+    this.price = this.totalPrice;
     let payment = money.split('|');
 
     let order = {
-      customer: '6247da6c8904fb3a816373d8',
+      customer: payment.length === 3 ? payment[2] : '6251e27d93a023530f06d0ae',
       orderItems: this.carts,
       discount: {
         discount_type: '฿', //%,฿
@@ -223,15 +225,25 @@ export class ShopComponent implements OnInit {
       totalPrice: this.totalPrice,
     };
     this.payment_return = payment[0];
-    this.formModal.hide();
-    this.modalSuccess.show();
 
     let formData = new FormData();
     formData.append('data', JSON.stringify(order));
 
     this.orderService.createOrder(formData).subscribe({
-      next: (response) => {
-        this.print_form = true;
+      next: (response: any) => {
+        if (response.status === 'success') {
+          this.print_form = true;
+          this.formModal.hide();
+          this.modalSuccess.show();
+          this.getProduct();
+        } else {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: response.message,
+            showConfirmButton: true,
+          });
+        }
       },
       error: (error) => console.error(error),
     });

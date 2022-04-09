@@ -4,44 +4,160 @@
   tabindex="-1"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
 >
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-        <div id="calculator-display">
-          <button class="ng-star-inserted" (click)="clear()">
-            <img src="assets/images/ic_clear.svg" style="width: 20px" /></button
-          ><!---->
-          <div>{{ totalNumber }}</div>
-        </div>
-        <div class="numpad-container">
-          <button (click)="setNumber(7)">7</button>
-          <button (click)="setNumber(8)">8</button>
-          <button (click)="setNumber(9)">9</button>
-          <button (click)="fullNumber(1000)" class="hotkey-button">1000</button>
-          <button (click)="setNumber(4)">4</button>
-          <button (click)="setNumber(5)">5</button>
-          <button (click)="setNumber(6)">6</button>
-          <button (click)="fullNumber(500)" class="hotkey-button">500</button>
-          <button (click)="setNumber(1)">1</button>
-          <button (click)="setNumber(2)">2</button>
-          <button (click)="setNumber(3)">3</button>
-          <button (click)="fullNumber(100)" class="hotkey-button">100</button>
-          <button (click)="setDot('.')">.</button>
-          <button (click)="setNumber(0)">0</button>
-          <button (click)="remove()"><i class="bi bi-x-lg"></i></button>
-          <button (click)="fullNumberAll()" class="hotkey-button">เต็ม</button>
+        <div *ngIf="!showMember">
+          <div id="calculator-display">
+            <button class="ng-star-inserted" (click)="clear()">
+              <img
+                src="assets/images/ic_clear.svg"
+                style="width: 20px"
+              /></button
+            ><!---->
+            <div>{{ totalNumber }}</div>
+          </div>
+          <div class="numpad-container">
+            <button (click)="setNumber(7)">7</button>
+            <button (click)="setNumber(8)">8</button>
+            <button (click)="setNumber(9)">9</button>
+            <button (click)="fullNumber(1000)" class="hotkey-button">
+              1000
+            </button>
+            <button (click)="setNumber(4)">4</button>
+            <button (click)="setNumber(5)">5</button>
+            <button (click)="setNumber(6)">6</button>
+            <button (click)="fullNumber(500)" class="hotkey-button">500</button>
+            <button (click)="setNumber(1)">1</button>
+            <button (click)="setNumber(2)">2</button>
+            <button (click)="setNumber(3)">3</button>
+            <button (click)="fullNumber(100)" class="hotkey-button">100</button>
+            <button (click)="setDot('.')">.</button>
+            <button (click)="setNumber(0)">0</button>
+            <button (click)="remove()"><i class="bi bi-backspace"></i></button>
+            <button (click)="fullNumberAll()" class="hotkey-button">
+              เต็ม
+            </button>
 
-          <button></button>
-          <button></button>
-          <button data-bs-dismiss="modal" aria-label="Close">ปิด</button>
-          <button
-            class="btn btn-primary btn-ok"
-            [disabled]="disabledSubmit"
-            (click)="submit()"
-          >
-            ตกลง
-          </button>
+            <button (click)="closeModal()">ปิด</button>
+            <button>
+              <div
+                *ngIf="select_member"
+                style="font-size: 14px"
+                class="text-success"
+              >
+                {{ customer.firstname }}
+              </div>
+            </button>
+            <button (click)="filterMember()">
+              <i class="bi bi-person-circle"></i> สมาชิก
+            </button>
+            <button
+              class="btn btn-primary btn-ok"
+              [disabled]="disabledSubmit"
+              (click)="submit()"
+            >
+              ตกลง
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="showMember">
+          <div class="container mt-3 mb-3">
+            <div class="mb-2">
+              <button class="btn btn-sm btn-default" (click)="back()">
+                <i class="bi bi-chevron-left"></i> ย้อนกลับ
+              </button>
+            </div>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link active"
+                  id="home-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#filterMember"
+                  type="button"
+                  role="tab"
+                  aria-controls="home"
+                  aria-selected="true"
+                >
+                  สมาชิก
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="profile-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#profile"
+                  type="button"
+                  role="tab"
+                  aria-controls="profile"
+                  aria-selected="false"
+                >
+                  เพิ่ม
+                </button>
+              </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div
+                class="tab-pane fade show active"
+                id="filterMember"
+                role="tabpanel"
+                aria-labelledby="home-tab"
+              >
+                <div class="mt-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="เลขสมาชิก"
+                    [(ngModel)]="member_id"
+                    (ngModelChange)="searchMemberById()"
+                  />
+                  <div *ngIf="customer_message == ''">
+                    <div class="card mt-2">
+                      <div class="card-body">
+                        <p>{{ member_id }}:คุณ {{ customer.firstname }}</p>
+                      </div>
+                      <div class="card-footer">
+                        <div class="d-grid gap-2">
+                          <button
+                            class="btn btn-primary"
+                            (click)="selectMember()"
+                            type="button"
+                          >
+                            ยืนยัน
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div *ngIf="customer_message !== ''">
+                    <div class="card mt-2">
+                      <div class="card-body">
+                        <p>{{ customer_message }}</p>
+                      </div>
+                      <div class="card-footer"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="tab-pane fade"
+                id="profile"
+                role="tabpanel"
+                aria-labelledby="profile-tab"
+              >
+                <app-create-customer
+                  (selectMemberIdOnRegister)="selectMemberIdOnRegister($event)"
+                ></app-create-customer>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
