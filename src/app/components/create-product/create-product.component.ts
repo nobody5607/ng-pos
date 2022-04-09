@@ -35,7 +35,7 @@ export class CreateProductComponent implements OnInit {
     units: new FormControl('', Validators.required),
     weight: new FormControl('', Validators.required),
     barcode_code: new FormControl(''),
-    cost_discount_price: new FormControl(''),
+    cost_discount_price: new FormControl(0),
     min_stock: new FormControl('', Validators.required),
     enable_rounding: new FormControl(false),
   });
