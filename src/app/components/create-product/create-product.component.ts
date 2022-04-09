@@ -88,7 +88,9 @@ export class CreateProductComponent implements OnInit {
           stock: p.stock,
           weight: p.weight,
           barcode_code: p.barcode_code,
-          cost_discount_price: p.cost_discount_price,
+          cost_discount_price: p.cost_discount_price
+            ? p.cost_discount_price
+            : 0,
           min_stock: p.min_stock,
           enable_rounding: p.enable_rounding ? p.enable_rounding : false,
         });

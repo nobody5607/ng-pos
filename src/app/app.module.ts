@@ -18,6 +18,8 @@ import { CreateProductComponent } from './components/create-product/create-produ
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { NavbarComponent } from './components/layout/navbar/navbar.component';
+import { NavbarLeftComponent } from './components/layout/navbar-left/navbar-left.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +32,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginComponent,
     ProductComponent,
     CreateProductComponent,
+    NavbarComponent,
+    NavbarLeftComponent,
   ],
   imports: [
     HttpClientModule,
