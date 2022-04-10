@@ -22,6 +22,14 @@ import { NavbarComponent } from './components/layout/navbar/navbar.component';
 import { NavbarLeftComponent } from './components/layout/navbar-left/navbar-left.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { CreateCustomerComponent } from './components/create-customer/create-customer.component';
+import { ReportComponent } from './components/report/report.component';
+import { TransactionComponent } from './components/transaction/transaction.component';
+import { ProductHistoryComponent } from './components/product-history/product-history.component';
+import { BranchComponent } from './components/branch/branch.component';
+import { StaffComponent } from './components/staff/staff.component';
+import { PromotionComponent } from './components/promotion/promotion.component';
+import { DiscountComponent } from './components/discount/discount.component';
+import { SettingComponent } from './components/setting/setting.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +46,14 @@ import { CreateCustomerComponent } from './components/create-customer/create-cus
     NavbarLeftComponent,
     CustomerComponent,
     CreateCustomerComponent,
+    ReportComponent,
+    TransactionComponent,
+    ProductHistoryComponent,
+    BranchComponent,
+    StaffComponent,
+    PromotionComponent,
+    DiscountComponent,
+    SettingComponent,
   ],
   imports: [
     HttpClientModule,

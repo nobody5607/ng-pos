@@ -1,6 +1,132 @@
 <div class="container">
   <h3>สวัสดีคุณ {{ userLogin.name }}</h3>
-  <a routerLink="/shop"> ขาย </a>&nbsp;
-  <a routerLink="/product"> รายการสินค้า </a>
-  <a routerLink="/customer"> ลูกค้า </a>
+
+  <div class="row">
+    <div class="col-2">
+      <div class="card">
+        <div class="card-body text-center">
+          <a routerLink="/shop"> ขาย </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card">
+        <div class="card-body text-center">
+          <a routerLink="/product"> สต็อก </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card">
+        <div class="card-body text-center">
+          <a routerLink="/report"> รายงาน </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card">
+        <div class="card-body text-center">
+          <a routerLink="/customer"> ลูกค้า </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card">
+        <div class="card-body text-center">
+          <a routerLink="/product"> นำเข้า </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="card">
+        <div class="card-body text-center">
+          <a routerLink="/setting"> ตั้งค่า </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-4">ยอดขายวันนี้: 10/04/2022 13:21</div>
+    <div class="col-6">
+      <div class="row">
+        <div class="col-6">เลือกสาขา</div>
+        <div class="col-6">เลือกพนักงาน</div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">กำไรสุทธิ฿</div>
+            <div class="col-6">0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">ยอดขาย฿</div>
+            <div class="col-6">0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">ต้นทุน฿</div>
+            <div class="col-6">0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">ส่วนลด฿</div>
+            <div class="col-6">0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">กราฟ</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th class="text-center">รายการ</th>
+                  <th class="text-center">ยอดรวม</th>
+                  <th class="text-center">ส่วนลด</th>
+                  <th class="text-center">คืนเงิน</th>
+                  <th class="text-center">ยอดสุทธิ</th>
+                  <th class="text-center">ต้นทุน</th>
+                  <th class="text-center">กำไร</th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

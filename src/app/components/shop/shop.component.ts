@@ -5,6 +5,8 @@ import { OrderData } from '../../Interfaces/order';
 import { Carts } from '../../Interfaces/carts';
 import { OrderService } from '../../services/order.service';
 import Swal from 'sweetalert2';
+import { AuthService } from './../../services/auth.service';
+import * as moment from 'moment';
 
 declare var window: any;
 @Component({
@@ -28,12 +30,18 @@ export class ShopComponent implements OnInit {
   modal_type: any; //ประเภท คำนวน ส่วนลด หรือ จำนวนสินค้า
   select_data: any; // คลิงเปลี่ยนแปลงจำนวนสินค้า
   disabled_btn_checkout = true;
+  useLogin: any;
+  customer_name = '';
+  create_date = '';
   // totalMoney: any; //เงินทอน
   constructor(
     private productService: ProductService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    public authService: AuthService
   ) {}
   ngOnInit(): void {
+    this.useLogin = this.authService.getUserInfo();
+
     this.formModal = new window.bootstrap.Modal(
       document.getElementById('modalCalculator')
     );
@@ -205,9 +213,11 @@ export class ShopComponent implements OnInit {
     console.log(money); //เงินทอน
     this.price = this.totalPrice;
     let payment = money.split('|');
-
+    if (payment.length >= 3) {
+      this.customer_name = payment[3];
+    }
     let order = {
-      customer: payment.length === 3 ? payment[2] : '6251e27d93a023530f06d0ae',
+      customer: payment.length >= 3 ? payment[2] : '6251e27d93a023530f06d0ae',
       orderItems: this.carts,
       discount: {
         discount_type: '฿', //%,฿
@@ -228,7 +238,7 @@ export class ShopComponent implements OnInit {
 
     let formData = new FormData();
     formData.append('data', JSON.stringify(order));
-
+    this.create_date = moment().format('YYYY-MM-DD HH:mm:ss');
     this.orderService.createOrder(formData).subscribe({
       next: (response: any) => {
         if (response.status === 'success') {
@@ -236,6 +246,7 @@ export class ShopComponent implements OnInit {
           this.formModal.hide();
           this.modalSuccess.show();
           this.getProduct();
+          // this.closeOrder();
         } else {
           Swal.fire({
             position: 'center',
@@ -255,6 +266,7 @@ export class ShopComponent implements OnInit {
     this.discountPrice = 0;
     this.carts = [];
     this.print_form = false;
+    this.create_date = '';
   }
 
   //

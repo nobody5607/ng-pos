@@ -256,11 +256,11 @@
       <hr />
       <div class="list">
         <div>พนักงานขาย</div>
-        <div class="text-rights">Chanpan Nuttaphon</div>
+        <div class="text-rights">{{ useLogin ? useLogin.name : "" }}</div>
       </div>
       <div class="list">
         <div>ลูกค้า</div>
-        <div class="text-rights">Chanpan Nuttaphon</div>
+        <div class="text-rights">{{ customer_name }}</div>
       </div>
       <div class="list">
         <div>จุดขาย</div>
@@ -273,7 +273,7 @@
 
       <div>
         <br />
-        <div class="text-centers">** วันที่ 06/04/2022 11:14:49 **</div>
+        <div class="text-centers">** วันที่ {{ create_date }} **</div>
       </div>
     </div>
   </div>

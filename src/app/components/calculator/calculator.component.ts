@@ -92,7 +92,6 @@ export class CalculatorComponent implements OnInit {
   }
   //ล้างข้อมูล
   clear() {
-    this.select_member = '';
     this.totalNumber = '0';
     this.checkNumber();
   }
@@ -103,11 +102,12 @@ export class CalculatorComponent implements OnInit {
     //totalNumber ยอดเงินที่จ่าย
     let member = '';
     if (this.select_member) {
-      member = `|${this.select_member}`;
+      member = `|${this.select_member}|${this.customer.firstname} ${this.customer.lastname}`;
     }
     let total = parseFloat(this.totalNumber) - this.totalPrice;
     this.totalMoney.emit(total.toString() + '|' + this.totalNumber + member); //เงินทอน|จำนวนเงินที่จ่าย 10|100
     //this.formModal.hide();
+    this.select_member = '';
     this.clear();
   }
 

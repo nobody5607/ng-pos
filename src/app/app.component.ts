@@ -10,7 +10,11 @@ export class AppComponent implements OnInit {
   formModal: any;
   mySidebar: any;
   myContent: any;
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    setTimeout(() => {
+      (document.getElementById('sidebarToggle') as HTMLFormElement).click();
+    }, 100);
+  }
   openNav() {
     this.mySidebar = 'width:150px;';
     this.myContent = 'margin-left:150px;';

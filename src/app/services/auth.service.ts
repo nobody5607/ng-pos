@@ -8,8 +8,15 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
   private API_URL = `${environment.API_URL}/auth/login`; // URL to web api
-  constructor(private http: HttpClient) {}
 
+  constructor(private http: HttpClient) {}
+  getUserInfo() {
+    let user = localStorage.getItem('user');
+    if (user) {
+      return JSON.parse(user);
+    }
+    return null;
+  }
   login(username: string, password: string) {
     let user = window.btoa(username + ':' + password);
     let headers = new HttpHeaders({
